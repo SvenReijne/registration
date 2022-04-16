@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: load-balancer-example
+  name: cacdotnet
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: load-balancer-example
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: load-balancer-example
+    spec:
+      containers:
+      - image: gcr.io/week8demo-293819/cacdotnet:2.0
+        name: cacdotnet
+        env:
+        - name: PORT
+          value: 5000
+        ports:
+        - containerPort: 80
